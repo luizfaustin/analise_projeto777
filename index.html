@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise e Projeto de Software</title>
+    <style>
+        /* Variáveis de Tema (Light Mode por padrão) */
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --header-bg: #2c3e50;
+            --header-text: #ecf0f1;
+            --card-bg: #ffffff;
+            --primary-color: #3498db;
+            --primary-hover: #2980b9;
+            --border-color: #ddd;
+        }
+
+        /* Variáveis para Dark Mode */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --header-bg: #1f1f1f;
+            --header-text: #ffffff;
+            --card-bg: #1e1e1e;
+            --primary-color: #4db8ff;
+            --primary-hover: #3192d6;
+            --border-color: #333;
+        }
+
+        /* Reset e Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+        }
+
+        .theme-btn {
+            background-color: transparent;
+            color: var(--header-text);
+            border: 1px solid var(--header-text);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .theme-btn:hover {
+            background-color: var(--header-text);
+            color: var(--header-bg);
+        }
+
+        /* Container Principal */
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Sistema de Abas (Tabs) */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px 5px 0 0;
+            border-bottom: none;
+            font-weight: bold;
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        ul {
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            margin-top: auto;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            .tabs {
+                flex-direction: column;
+                gap: 0;
+            }
+            .tab-btn {
+                border-radius: 0;
+                border: 1px solid var(--border-color);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Engenharia de Software</h1>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeToggleBtn">🌙 Modo Escuro</button>
+    </header>
+
+    <main>
+        <section>
+            <h2>O que é Análise e Projeto?</h2>
+            <p>A fase de <strong>Análise e Projeto</strong> (Analysis and Design) é um dos pilares da Engenharia de Software. Ela atua como a ponte entre a concepção inicial de uma ideia (o problema do cliente) e a implementação do código fonte (a solução técnica).</p>
+            <p>Resumidamente, dividimos esta disciplina em duas grandes perguntas:</p>
+            <ul>
+                <li><strong>Análise:</strong> <em>"O que o sistema deve fazer?"</em> (Foco no problema)</li>
+                <li><strong>Projeto:</strong> <em>"Como o sistema vai fazer isso?"</em> (Foco na solução)</li>
+            </ul>
+        </section>
+
+        <!-- Seção Interativa de Abas -->
+        <section>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab(event, 'analise')">1. A Fase de Análise</button>
+                <button class="tab-btn" onclick="openTab(event, 'projeto')">2. A Fase de Projeto</button>
+            </div>
+
+            <div id="analise" class="tab-content active">
+                <h3>Compreendendo o Domínio</h3>
+                <p>Na análise, o objetivo é entender as necessidades dos usuários e as regras de negócio. O resultado dessa fase é uma especificação clara de requisitos.</p>
+                <ul>
+                    <li><strong>Requisitos Funcionais:</strong> Descrevem as ações que o sistema deve executar (ex: "O sistema deve emitir nota fiscal").</li>
+                    <li><strong>Requisitos Não-Funcionais:</strong> Descrevem qualidades do sistema (ex: "O sistema deve carregar em menos de 2 segundos" ou "O sistema deve ter autenticação 2FA").</li>
+                    <li><strong>Ferramentas comuns:</strong> Diagramas de Caso de Uso (UML), Histórias de Usuário (User Stories), Entrevistas com stakeholders.</li>
+                </ul>
+            </div>
+
+            <div id="projeto" class="tab-content">
+                <h3>Arquitetando a Solução</h3>
+                <p>O projeto (design) pega os requisitos levantados na análise e define a arquitetura técnica que será programada pelos desenvolvedores.</p>
+                <ul>
+                    <li><strong>Projeto de Arquitetura:</strong> Escolha de tecnologias, padrões de projeto (Design Patterns como MVC, Singleton) e infraestrutura.</li>
+                    <li><strong>Projeto de Banco de Dados:</strong> Modelagem de Entidade-Relacionamento (MER), normalização de tabelas e definição de esquemas.</li>
+                    <li><strong>Projeto de Interface (UI/UX):</strong> Criação de wireframes, protótipos navegáveis e definição da jornada do usuário.</li>
+                    <li><strong>Ferramentas comuns:</strong> Diagrama de Classes, Diagrama de Sequência, Figma, Modelagem de Dados.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Por que essa etapa é vital?</h2>
+            <p id="dynamic-fact">Mudar uma regra de negócio ou corrigir um erro de arquitetura durante a fase de análise custa <strong>1x</strong>. Corrigir esse mesmo erro depois que o software já está programado e em produção pode custar até <strong>100x mais</strong>. Planejar evita retrabalho, atrasos e estouros de orçamento.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Introdução à Análise e Projeto de Software.</p>
+    </footer>
+
+    <script>
+        // Lógica para Alternar Tema (Dark/Light Mode)
+        function toggleTheme() {
+            const body = document.documentElement;
+            const themeBtn = document.getElementById('themeToggleBtn');
+            const currentTheme = body.getAttribute('data-theme');
+
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                themeBtn.textContent = '🌙 Modo Escuro';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = '☀️ Modo Claro';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Verifica a preferência salva no LocalStorage ao carregar a página
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('themeToggleBtn').textContent = '☀️ Modo Claro';
+            }
+        };
+
+        // Lógica para o Sistema de Abas (Tabs)
+        function openTab(evt, tabName) {
+            // Esconde todo o conteúdo das abas
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+
+            // Remove a classe "active" de todos os botões
+            const tabBtns = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove('active');
+            }
+
+            // Mostra o conteúdo da aba atual e adiciona "active" ao botão clicado
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
